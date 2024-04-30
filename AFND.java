@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class AFND {
-    private Map<String, Map<String, Set<String>>> transiciones = new HashMap<>();
-    private String estadoInicial;
-    private Set<String> estadosFinales = new HashSet<>();
+    public Map<String, Map<String, Set<String>>> transiciones = new HashMap<>();
+    public String estadoInicial;
+    public Set<String> estadosFinales = new HashSet<>();
 
     public void agregarTransicion(String estado, String simbolo, String nuevoEstado) {
         transiciones.putIfAbsent(estado, new HashMap<>());

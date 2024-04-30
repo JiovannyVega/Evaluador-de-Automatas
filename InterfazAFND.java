@@ -37,6 +37,10 @@ public class InterfazAFND extends JFrame {
         crearAutomataButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Limpiar el mapa de transiciones y el conjunto de estados finales
+                afnd.transiciones.clear();
+                afnd.estadosFinales.clear();
+
                 for (int i = 0; i < tablaTransiciones.getRowCount(); i++) {
                     String estado = (String) tablaTransiciones.getValueAt(i, 0);
                     String estadoSinMarca = estado;
@@ -52,14 +56,12 @@ public class InterfazAFND extends JFrame {
                         String simbolo = tablaTransiciones.getColumnName(j);
                         String nuevosEstados = (String) tablaTransiciones.getValueAt(i, j);
                         if (nuevosEstados != null && !nuevosEstados.isEmpty()) {
-                            // Divide los estados por la coma y agrega una transición para cada uno
                             for (String nuevoEstado : nuevosEstados.split(",")) {
                                 afnd.agregarTransicion(estadoSinMarca, simbolo, nuevoEstado.trim());
                             }
                         }
                     }
                 }
-
                 JOptionPane.showMessageDialog(null, "Autómata creado:\n" + afnd.toString() +
                         "\nEstado inicial: " + afnd.getEstadoInicial() +
                         "\nEstados finales: " + afnd.getEstadosFinales());
