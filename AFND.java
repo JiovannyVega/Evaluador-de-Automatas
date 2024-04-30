@@ -64,6 +64,6 @@ public class AFND {
 
         estadosActuales.retainAll(estadosFinales);
         return "La entrada es " + (!estadosActuales.isEmpty() ? "aceptada" : "rechazada") +
-                "\nCamino: " + String.join(" ", camino);
+                "\nCamino:\n " + String.join(" ", camino);
     }
 }
