@@ -72,8 +72,8 @@ public class InterfazAFND extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String entrada = entradaField.getText();
-                boolean aceptada = afnd.acepta(entrada);
-                JOptionPane.showMessageDialog(null, "La entrada es " + (aceptada ? "aceptada" : "rechazada"));
+                String aceptada = afnd.acepta(entrada);
+                JOptionPane.showMessageDialog(null, aceptada);
             }
         });
 

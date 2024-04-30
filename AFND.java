@@ -41,26 +41,29 @@ public class AFND {
         return sb.toString();
     }
 
-    public boolean acepta(String entrada) {
+    public String acepta(String entrada) {
         Set<String> estadosActuales = new HashSet<>();
         estadosActuales.add(estadoInicial);
+        List<String> camino = new ArrayList<>();
 
         for (char simbolo : entrada.toCharArray()) {
             Set<String> nuevosEstados = new HashSet<>();
             for (String estado : estadosActuales) {
+                camino.add("(" + estado + ", " + simbolo + ")={");
                 Map<String, Set<String>> transicionesDesdeEstado = transiciones.get(estado);
                 if (transicionesDesdeEstado != null) {
                     Set<String> transicionesConSimbolo = transicionesDesdeEstado.get(String.valueOf(simbolo));
                     if (transicionesConSimbolo != null) {
                         nuevosEstados.addAll(transicionesConSimbolo);
+                        camino.add(String.join(", ", transicionesConSimbolo) + "}\n");
                     }
                 }
             }
             estadosActuales = nuevosEstados;
         }
 
-        // Comprueba si alguno de los estados actuales es un estado final
         estadosActuales.retainAll(estadosFinales);
-        return !estadosActuales.isEmpty();
+        return "La entrada es " + (!estadosActuales.isEmpty() ? "aceptada" : "rechazada") +
+                "\nCamino: " + String.join(" ", camino);
     }
 }
