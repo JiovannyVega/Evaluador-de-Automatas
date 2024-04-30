@@ -65,6 +65,16 @@ public class InterfazAFND extends JFrame {
                 JOptionPane.showMessageDialog(null, "Autómata creado:\n" + afnd.toString() +
                         "\nEstado inicial: " + afnd.getEstadoInicial() +
                         "\nEstados finales: " + afnd.getEstadosFinales());
+                // Crear y mostrar el panel del autómata
+                AutomataPanel automataPanel = new AutomataPanel(afnd);
+                JFrame frame = new JFrame();
+                frame.add(automataPanel);
+                frame.setSize(300, 300);
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
+
+                // Forzar un nuevo dibujo del autómata
+                automataPanel.repaint();
             }
         });
 

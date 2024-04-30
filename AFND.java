@@ -66,4 +66,24 @@ public class AFND {
         return "La entrada es " + (!estadosActuales.isEmpty() ? "aceptada" : "rechazada") +
                 "\nCamino:\n " + String.join(" ", camino);
     }
+
+    public Set<String> getEstados() {
+        return transiciones.keySet();
+    }
+
+    public Set<String> getSimbolos() {
+        Set<String> simbolos = new HashSet<>();
+        for (Map<String, Set<String>> transicionesDesdeEstado : transiciones.values()) {
+            simbolos.addAll(transicionesDesdeEstado.keySet());
+        }
+        return simbolos;
+    }
+
+    public Set<String> getTransiciones(String estado, String simbolo) {
+        Map<String, Set<String>> transicionesDesdeEstado = transiciones.get(estado);
+        if (transicionesDesdeEstado != null) {
+            return transicionesDesdeEstado.get(simbolo);
+        }
+        return Collections.emptySet();
+    }
 }
